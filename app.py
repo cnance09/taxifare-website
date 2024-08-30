@@ -3,6 +3,7 @@ import requests
 import datetime
 import ast
 import numpy as np
+import pandas as pd
 
 st.title('''
 TaxiFareModel
@@ -49,3 +50,6 @@ data = requests.get(url, params).content
 data = ast.literal_eval(data.decode('utf-8'))
 data = np.round(data.get('fare'),2 )
 st.write('Your estimated fare is :', data)
+
+coordinates = pd.DataFrame({'longitude': [pickup_lon, dropoff_lon], 'latitude': [pickup_lat, dropoff_lat]})
+st.map(data=coordinates)
